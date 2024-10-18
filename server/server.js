@@ -9,6 +9,12 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.get("/*", (req, res) => {
+  res.status(404).json({
+    message: "Route not found",
+  });
+});
+
 app.listen(port, () => {
   connectDB();
   console.log(`Server is running on port ${port}`);
