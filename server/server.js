@@ -22,5 +22,5 @@ app.use("/api/auth", authRouter);
 
 app.listen(port, () => {
   connectDB();
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
