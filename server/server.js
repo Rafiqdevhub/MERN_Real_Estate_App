@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cors = require("cors");
 const connectDB = require("./config/dbConnection");
 const authRouter = require("./routes/authRoute");
 
@@ -7,6 +8,14 @@ const app = express();
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
+
+// CORS
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
 // Home Route
 app.get("/", (req, res) => {
