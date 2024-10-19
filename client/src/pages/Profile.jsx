@@ -17,8 +17,8 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import App from "../App";
 import { AUTH_API_END_POINT } from "../utils/constants";
+import { app } from "../firebase";
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -32,12 +32,6 @@ const Profile = () => {
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
-  // firebase storage
-  // allow read;
-  // allow write: if
-  // request.resource.size < 2 * 1024 * 1024 &&
-  // request.resource.contentType.matches('image/.*')
-
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -45,7 +39,7 @@ const Profile = () => {
   }, [file]);
 
   const handleFileUpload = (file) => {
-    const storage = getStorage(App);
+    const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -188,7 +182,7 @@ const Profile = () => {
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className="text-green-700">Image successfully uploaded!</span>
+            <span className="text-rose-400">Image successfully uploaded!</span>
           ) : (
             ""
           )}
@@ -198,7 +192,7 @@ const Profile = () => {
           placeholder="username"
           defaultValue={currentUser.username}
           id="username"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg  bg-slate-700"
           onChange={handleChange}
         />
         <input
@@ -206,7 +200,7 @@ const Profile = () => {
           placeholder="email"
           id="email"
           defaultValue={currentUser.email}
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg  bg-slate-700"
           onChange={handleChange}
         />
         <input
@@ -214,7 +208,7 @@ const Profile = () => {
           placeholder="password"
           onChange={handleChange}
           id="password"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg  bg-slate-700"
         />
         <button
           disabled={loading}
@@ -232,11 +226,14 @@ const Profile = () => {
       <div className="flex justify-between mt-5">
         <span
           onClick={handleDeleteUser}
-          className="text-red-700 cursor-pointer"
+          className="text-opacity-95 cursor-pointer"
         >
           Delete account
         </span>
-        <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+        <span
+          onClick={handleSignOut}
+          className="text-opacity-100 cursor-pointer"
+        >
           Sign out
         </span>
       </div>
@@ -245,7 +242,7 @@ const Profile = () => {
       <p className="text-green-700 mt-5">
         {updateSuccess ? "User is updated successfully!" : ""}
       </p>
-      <button onClick={handleShowListings} className="text-green-700 w-full">
+      <button onClick={handleShowListings} className="text-rose-950 w-full">
         Show Listings
       </button>
       <p className="text-red-700 mt-5">
