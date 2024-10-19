@@ -18,7 +18,7 @@ import {
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import App from "../App";
-import { USER_API_END_POINT } from "../utils/constants";
+import { AUTH_API_END_POINT } from "../utils/constants";
 
 const Profile = () => {
   const fileRef = useRef(null);
@@ -117,7 +117,7 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch(`${USER_API_END_POINT}/sign-out`);
+      const res = await fetch(`${AUTH_API_END_POINT}/sign-out`);
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));

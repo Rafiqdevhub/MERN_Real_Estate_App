@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
-import { USER_API_END_POINT } from "../utils/constants";
+import { AUTH_API_END_POINT } from "../utils/constants";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -18,7 +18,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch(`${USER_API_END_POINT}/sign-up`, {
+      const res = await fetch(`${AUTH_API_END_POINT}/sign-up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
