@@ -5,6 +5,8 @@ import About from "./pages/About";
 import SingIn from "./pages/SingIn";
 import Search from "./pages/Search";
 import Header from "./components/Header";
+import Profile from "./pages/Profile";
+import PrivateRoute from "./components/PrivateRoute";
 const App = () => {
   return (
     <BrowserRouter>
@@ -15,6 +17,9 @@ const App = () => {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/search" element={<Search />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
