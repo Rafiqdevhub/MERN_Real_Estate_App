@@ -1,11 +1,14 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const connectDB = require("./config/dbConnection");
 const authRouter = require("./routes/authRoute");
+const userRouter = require("./routes/userRoute");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 
@@ -31,6 +34,7 @@ app.get("/*", (req, res) => {
 
 // Routes
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
