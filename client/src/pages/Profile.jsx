@@ -17,7 +17,7 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { AUTH_API_END_POINT } from "../utils/constants";
+import { AUTH_API_END_POINT, USER_API_END_POINT } from "../utils/constants";
 import { app } from "../firebase";
 
 const Profile = () => {
@@ -71,13 +71,16 @@ const Profile = () => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${USER_API_END_POINT}/update/${currentUser._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
@@ -94,9 +97,12 @@ const Profile = () => {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${USER_API_END_POINT}/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
@@ -126,7 +132,9 @@ const Profile = () => {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(
+        `${USER_API_END_POINT}/listings/${currentUser._id}`
+      );
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);
