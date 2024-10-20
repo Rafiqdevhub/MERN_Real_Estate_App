@@ -1,5 +1,5 @@
-const express = require("express");
 require("dotenv").config();
+const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/dbConnection");
@@ -25,16 +25,16 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// Routes
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+
 // 404 Route
 app.get("/*", (req, res) => {
   res.status(404).json({
     message: "Route not found",
   });
 });
-
-// Routes
-app.use("/api/auth", authRouter);
-app.use("/api/user", userRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
