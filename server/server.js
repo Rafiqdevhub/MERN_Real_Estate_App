@@ -5,12 +5,13 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/dbConnection");
 const authRouter = require("./routes/authRoute");
 const userRouter = require("./routes/userRoute");
+const listingRouter = require("./routes/listingRoute");
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const port = process.env.PORT || 3000;
+const port = 5000;
 
 // CORS
 app.use(
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/listing", listingRouter);
 
 // 404 Route
 app.get("/*", (req, res) => {
