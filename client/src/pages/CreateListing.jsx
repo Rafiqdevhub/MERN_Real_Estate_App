@@ -32,7 +32,7 @@ const CreateListing = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -50,7 +50,7 @@ const CreateListing = () => {
           setImageUploadError(false);
           setUploading(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setImageUploadError("Image upload failed (2 mb max per image)");
           setUploading(false);
         });
@@ -163,7 +163,7 @@ const CreateListing = () => {
           <input
             type="text"
             placeholder="Name"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg  bg-slate-700"
             id="name"
             maxLength="62"
             minLength="10"
@@ -174,7 +174,7 @@ const CreateListing = () => {
           <textarea
             type="text"
             placeholder="Description"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg  bg-slate-700"
             id="description"
             required
             onChange={handleChange}
@@ -183,18 +183,18 @@ const CreateListing = () => {
           <input
             type="text"
             placeholder="Address"
-            className="border p-3 rounded-lg"
+            className="border p-3 rounded-lg  bg-slate-700"
             id="address"
             required
             onChange={handleChange}
             value={formData.address}
           />
-          <div className="flex gap-6 flex-wrap">
-            <div className="flex gap-2">
+          <div className="flex gap-6 flex-wrap ">
+            <div className="flex gap-2 ">
               <input
                 type="checkbox"
                 id="sale"
-                className="w-5"
+                className="w-5  bg-slate-700"
                 onChange={handleChange}
                 checked={formData.type === "sale"}
               />
@@ -204,13 +204,13 @@ const CreateListing = () => {
               <input
                 type="checkbox"
                 id="rent"
-                className="w-5"
+                className="w-5  bg-slate-700"
                 onChange={handleChange}
                 checked={formData.type === "rent"}
               />
               <span>Rent</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 ">
               <input
                 type="checkbox"
                 id="parking"
