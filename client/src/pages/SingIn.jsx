@@ -31,12 +31,16 @@ export default function SignIn() {
         },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      console.log(data);
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
+      console.log(res);
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        dispatch(signInFailure(errorData.message || "Something went wrong"));
         return;
       }
+
+      const data = await res.json();
+      console.log(data);
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
