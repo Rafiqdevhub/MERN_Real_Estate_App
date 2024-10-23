@@ -8,6 +8,7 @@ import {
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LISTING_API_END_POINT } from "../utils/constants";
 
 const CreateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -132,7 +133,7 @@ const CreateListing = () => {
         return setError("Discount price must be lower than regular price");
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`${LISTING_API_END_POINT}/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -147,7 +148,7 @@ const CreateListing = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      navigate(`${LISTING_API_END_POINT}/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
