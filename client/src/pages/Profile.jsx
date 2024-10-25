@@ -17,7 +17,11 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { AUTH_API_END_POINT, USER_API_END_POINT } from "../utils/constants";
+import {
+  AUTH_API_END_POINT,
+  LISTING_API_END_POINT,
+  USER_API_END_POINT,
+} from "../utils/constants";
 import { app } from "../firebase";
 
 const Profile = () => {
@@ -149,7 +153,7 @@ const Profile = () => {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
+      const res = await fetch(`${LISTING_API_END_POINT}/delete/${listingId}`, {
         method: "DELETE",
       });
       const data = await res.json();
